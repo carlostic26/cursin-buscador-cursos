@@ -4,7 +4,7 @@ import 'package:cursin/screens/drawer/drawer.dart';
 import 'package:cursin/screens/drawer/drawer_options/categorias_select.dart';
 import 'package:cursin/screens/drawer/drawer_options/search_courses.dart';
 import 'package:cursin/model/curso_lista_model.dart';
-import 'package:cursin/screens/detail_course.dart';
+import 'package:cursin/screens/course_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:restart_app/restart_app.dart';
@@ -266,11 +266,9 @@ class _UltimosCursosListaState extends State<UltimosCursosLista> {
                                                 Text(
                                                   items[index].title,
                                                   style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
                                                     fontSize: 16,
                                                     //COLOR DEL TEXTO TITULO
-                                                    color: Color.fromARGB(
-                                                        255, 53, 164, 255),
+                                                    color: Colors.green,
                                                   ),
                                                 ),
                                                 //SizedBox(height: 2),

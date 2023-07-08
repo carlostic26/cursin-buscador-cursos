@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cursin/model/curso_lista_model.dart';
-import 'package:cursin/screens/detail_course.dart';
+import 'package:cursin/screens/course_detail.dart';
 import 'package:cursin/model/dbhelper.dart';
 import 'package:cursin/screens/drawer/drawer_options/categorias_select.dart';
 import 'package:cursin/screens/drawer/drawer_options/categorias_showing.dart';
@@ -39,8 +39,7 @@ class _searchedCoursesState extends State<searchedCourses> {
 
   void loadStaticBannerAd() {
     staticAd = BannerAd(
-        adUnitId: //test: ca-app-pub-3940256099942544/6300978111  ||  real: ca-app-pub-4336409771912215/1019860019
-
+        adUnitId: //test: ca-app-pub-3940256099942544/6300978111 
             'ca-app-pub-3940256099942544/6300978111',
         size: AdSize.banner,
         request: request,
@@ -322,11 +321,9 @@ class _searchedCoursesState extends State<searchedCourses> {
                                               Text(
                                                 items[index].title,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
+                                                  fontSize: 16,
                                                   //COLOR DEL TEXTO TITULO
-                                                  color: Color.fromARGB(
-                                                      255, 53, 164, 255),
+                                                  color: Colors.green,
                                                 ),
                                               ),
                                               SizedBox(height: 5),

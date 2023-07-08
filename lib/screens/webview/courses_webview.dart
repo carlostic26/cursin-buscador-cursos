@@ -8,7 +8,6 @@ import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'package:device_info_plus/device_info_plus.dart';
 
 class webview extends StatefulWidget {
@@ -34,8 +33,6 @@ class webviewState extends State<webview> {
 
   final Completer<WebViewController> _controllerCompleter =
       Completer<WebViewController>();
-
-  //final globalKey = GlobalKey<ScaffoldState>();
 
   String modelDevice = '';
 
@@ -117,7 +114,7 @@ class webviewState extends State<webview> {
               'Mozilla/5.0 (Linux; Android 9.0; $modelDevice Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Mobile Safari/537.3',
           //'Mozilla/5.0 (Linux; Android 9.0; Build/N2G48H; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.70 Mobile Safari/537.36',
           //'Mozilla/5.0 (Linux; Android 9.0; $modelDevice Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Mobile Safari/537.3',
-//Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36
+          //Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36
 
           //    Web userAgent: $_webUserAgent
           javascriptMode: JavascriptMode.unrestricted,

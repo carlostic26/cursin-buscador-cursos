@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:cursin/controller/theme_preferences.dart';
-import 'package:cursin/screens/launch/percent_indicator_riverpod.dart';
+import 'package:cursin/services/localStorage/theme_preferences.dart';
+import 'package:cursin/screens/launch/loading_screen/percent_indicator_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cursin/model/dbhelper.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +11,10 @@ AppOpenAd? openAd;
 bool isAdLoaded = false;
 bool shouldShowAd = false; // Variable adicional para controlar si se debe mostrar el anuncio
 
-
 Future<void> loadAd() async {
   await AppOpenAd.load(
     adUnitId:
-        // test:  // ca-app-pub-3940256099942544/3419835294
-        // real: ca-app-pub-4336409771912215/5446190186 || real2:ca-app-pub-4336409771912215/5955842482
+        // test: // ca-app-pub-3940256099942544/3419835294
         'ca-app-pub-3940256099942544/3419835294',
     request: const AdRequest(),
     adLoadCallback: AppOpenAdLoadCallback(
@@ -28,7 +26,6 @@ Future<void> loadAd() async {
       },
       onAdFailedToLoad: (error) {
         print("Error al cargar el anuncio: $error");
-
         isAdLoaded = false; // El anuncio no se cargó o mostró correctamente
       },
     ),
@@ -51,24 +48,41 @@ Future<void> main() async {
   await MobileAds.instance.initialize();
   // Inicializar anuncio de apertura y cancelar después de 9 segundos
   await loadAd();
-Timer(Duration(seconds: 9), () async {
-  if (!shouldShowAd) { // Si el anuncio no se ha cargado
-    openAd?.dispose();
-    print('Anuncio de apertura cancelado después de 9 segundos.');
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('adCancelado', true);
-  } else { // Si el anuncio se ha cargado
-    if (isAdLoaded) { // Verifica que el anuncio se haya mostrado previamente
-      print('Anuncio de apertura mostrado correctamente.');
+  
+  Timer(Duration(seconds: 9), () async {
+    if (!shouldShowAd) { // Si el anuncio no se ha cargado
+      openAd?.dispose();
+      print('Anuncio de apertura cancelado después de 9 segundos.');
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setBool('adCancelado', false);
-      openAd?.show();
+      await prefs.setBool('adCancelado', true);
+    } else { // Si el anuncio se ha cargado
+      if (isAdLoaded) { // Verifica que el anuncio se haya mostrado previamente
+        print('Anuncio de apertura mostrado correctamente.');
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('adCancelado', false);
+        openAd?.show();
+      }
     }
-  }
-});
+  });
 
   runApp(ProviderScope(
     child: MaterialApp(
+
+
+      // Configuración del tema
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          // Color de fondo del AppBar
+          color: Colors.green,
+          
+          
+          // Iconos y elementos interactivos en el AppBar
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+        ),
+      ),
+
       debugShowCheckedModeBanner: false,
       home: PercentIndicatorRiverpod(),
     ),

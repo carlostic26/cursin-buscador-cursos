@@ -473,12 +473,15 @@ class _infoAppState extends State<infoApp> {
                       padding: EdgeInsets.fromLTRB(10, 2, 10, 10),
                       child: ElevatedButton(
                         style: ButtonStyle(
+                               
+    backgroundColor: MaterialStateProperty.all<Color>(Colors.green), // Cambia "Colors.blue" por el color que desees
+  
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                               side: BorderSide(
-                                color: Colors.blueAccent,
+                                color: Colors.green,
                                 width: 2.0,
                               ),
                             ),

@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cursin/screens/drawer/drawer_options/carruselCertifiedWidget.dart';
 import 'package:cursin/screens/drawer/drawer_options/categorias_select.dart';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -562,7 +560,7 @@ class _CustomDialogSliderState extends State<CustomDialogSlider> {
       body: AlertDialog(
         content: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.50,
+          height: MediaQuery.of(context).size.height * 0.55,
           child: Column(
             children: [
               Expanded(

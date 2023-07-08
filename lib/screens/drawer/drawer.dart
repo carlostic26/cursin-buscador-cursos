@@ -74,7 +74,7 @@ class _drawerCursinState extends State<drawerCursin> {
               decoration: BoxDecoration(
                   color: Colors.blue,
                   image: DecorationImage(
-                      image: AssetImage('assets/blue_background.jpg'),
+                      image: AssetImage('assets/green_background.png'),
                       fit: BoxFit.cover)),
             ),
             Container(

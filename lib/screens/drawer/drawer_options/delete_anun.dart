@@ -278,6 +278,10 @@ class _deleteAnunScreenState extends State<deleteAnunScreen> {
                   alignment: Alignment.topCenter,
                   padding: EdgeInsets.symmetric(horizontal: 5.0),
                   child: ElevatedButton.icon(
+
+                           style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(Colors.green), // Cambia "Colors.blue" por el color que desees
+  ),
                     onPressed: () {
                       showDialogConseguirMonedas();
                     },

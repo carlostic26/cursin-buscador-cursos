@@ -1,14 +1,14 @@
-import 'package:cursin/controller/theme_preferences.dart';
+import 'package:cursin/screens/launch/loading_screen/counting_animator.dart';
+import 'package:cursin/services/localStorage/theme_preferences.dart';
 import 'package:cursin/provider/riverpod.dart';
 import 'package:cursin/screens/drawer/drawer_options/categorias_select.dart';
-import 'package:cursin/screens/launch/dialog_slider_primera_vez.dart';
-import 'package:cursin/screens/launch/percent_indicator.dart';
+import 'package:cursin/screens/launch/dialog_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class PercentIndicatorRiverpod extends ConsumerWidget {
   const PercentIndicatorRiverpod({super.key});
@@ -16,15 +16,14 @@ class PercentIndicatorRiverpod extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final maxCourses = ref.watch(maxCourses_rp);
-    final isFirstBuild = ref.watch(isFirstBuild_rp);
-    final contadorFinalizado = ref.watch(contadorFinalizado_rp);
-    final isButtonVisible = ref.watch(isButtonVisible_rp);
     final buttonEnabled = ref.watch(buttonEnabled_rp);
 
     // Activa el botón después de 10 segundos
     Future.delayed(Duration(seconds: 10), () {
       activarBoton(ref);
     });
+
+    guardarPrimerAcceso();
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 3, 36, 53),

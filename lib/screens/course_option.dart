@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cursin/dialogs/dialog_class.dart';
+import 'package:cursin/methods/methods.dart';
 import 'package:cursin/screens/webview/courses_webview.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -23,10 +25,9 @@ class courseOption extends StatefulWidget {
 
 class _courseOptionState extends State<courseOption> {
   bool isloaded = false;
-
   final globalKey = GlobalKey<ScaffoldState>();
-
   bool? darkTheme1;
+  late WebViewController controllerGlobal;
 
   Future<Null> getSharedThemePrefs() async {
     SharedPreferences themePrefs = await SharedPreferences.getInstance();
@@ -35,14 +36,16 @@ class _courseOptionState extends State<courseOption> {
     });
   }
 
-  void initState() {
-    isloaded = true;
+DialogsCursin dialogs = DialogsCursin();
+Methods methods = Methods();
 
+@override
+  void initState() {
+    // TODO: implement initState
+    isloaded = true;
     //es necesario inicializar el sharedpreferences tema, para que la variable book darkTheme esté inicializada como la recepcion del valor del sharedpreferences
     getSharedThemePrefs();
   }
-
-  late WebViewController controllerGlobal;
 
   @override
   Widget build(BuildContext context) {
@@ -100,14 +103,6 @@ class _courseOptionState extends State<courseOption> {
                       onPrimary: Colors.white, // Establece el color del texto
                     ),
                     onPressed: () {
-                      //Navigator.of(context).pop();
-                      /*  Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => webview(
-                                nameCourse: widget.nameCourse,
-                                urlCourse: widget.urlCourse,
-                                imgCourse: widget.imgCourse,
-                                nombreEntidad: widget.nombreEntidad,
-                              ))); */
 
                       Navigator.of(context).pushReplacement(
                         PageRouteBuilder(
@@ -122,18 +117,8 @@ class _courseOptionState extends State<courseOption> {
                         ),
                       );
 
-                      //muestra por 3 seg dialogo de carga || a los 3 segundos se cierra el dialogo
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            Future.delayed(Duration(seconds: 4), () {
-                              Navigator.of(context).pop(true);
-                            });
-
-                            return const Center(
-                              child: const CircularProgressIndicator(),
-                            );
-                          });
+                      //muestra por 4 seg dialogo de carga y se cierra el dialogo
+                      dialogs.showCircularProgressDialog(context);
                     },
                     icon: Icon(
                       Icons.play_arrow,
@@ -149,7 +134,7 @@ class _courseOptionState extends State<courseOption> {
                   height: 16,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      openUrl();
+                      methods.openUrl(widget.urlCourse);
                     },
                     icon: Icon(
                       Icons.open_in_new,
@@ -171,7 +156,7 @@ class _courseOptionState extends State<courseOption> {
                           decoration: TextDecoration.underline,
                           color: Colors.grey)),
                   onTap: () {
-                    _diferenciaOpciones(context);
+                    dialogs.diferenciaOpciones(context);
                   },
                 ),
               ],
@@ -183,80 +168,14 @@ class _courseOptionState extends State<courseOption> {
   void handleClick(String value) {
     switch (value) {
       case 'Abrir con el navegador':
-        openUrl();
+        methods.openUrl(widget.urlCourse);
         break;
       case 'Compartir por':
-        compartirUrl();
+        methods.compartirUrl(widget.urlCourse);
         break;
     }
   }
 
-  //metodo para ejecutar el link de abrir en Chrome
-  void openUrl() async {
-    String url = widget.urlCourse.toString(); //antes era const
-    if (await canLaunch(url)) launch(url);
-  }
-
-  void compartirUrl() {
-    Share.share("Acabé de encontrar un " +
-        widget.nameCourse.toString() +
-        " GRATIS y CON CERTIFICADO incluido 🥳" +
-        "\n\nDan acceso a este y otros cursos gratis en esta App llamada Cursin 👏🏻" +
-        " Aprovechala que recién la acaban de sacar en la PlayStore 🥳👇🏼" +
-        "\n\nhttps://play.google.com/store/apps/details?id=com.appcursin.blogspot");
-  }
-
-  void _diferenciaOpciones(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-              title: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Formas de abrir el curso",
-                      style: TextStyle(color: Colors.blue, fontSize: 20.0),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'El curso al que vas a acceder ha sido indexado por Cursin. Puedes abrirlo dentro de la app o en tu navegador.\n\nAlgunos cursos puede que no reproduzcan sus videos dentro de Cursin, o puede que tengan piezas faltantes. Si es tu caso te recomendamos abrir el curso con el navegador.' +
-                          '\n\nRecuerda que Cursin no emite los cursos, solo los indexa.',
-                      style: TextStyle(color: Colors.black, fontSize: 14.0),
-                    ),
-                  ]),
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.topCenter,
-                  padding: EdgeInsets.symmetric(horizontal: 5.0),
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(
-                              color: Colors.blueAccent,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        'Entiendo',
-                        style: TextStyle(fontSize: 15, color: Colors.white),
-                      ),
-                      //when user press "De acuerdo", it wil continue to add course dialog to pass another screen
-                      onPressed: () => {
-                            Navigator.pop(context),
-                          }),
-                ),
-              ]);
-        });
-  }
 
   Future<bool> _goBack(BuildContext context) {
     Navigator.of(context).pop();
