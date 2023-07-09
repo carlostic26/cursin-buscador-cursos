@@ -23,9 +23,50 @@ class _searchedCoursesState extends State<searchedCourses> {
   late DatabaseHandler handler;
   Future<List<curso>>? _todo;
 
-  //ads
-  late BannerAd staticAd;
-  bool staticAdLoaded = false;
+  BannerAd? _anchoredAdaptiveAd;
+  bool _isLoaded = false;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _loadAdaptativeAd();
+  }
+
+  Future<void> _loadAdaptativeAd() async {
+    // Get an AnchoredAdaptiveBannerAdSize before loading the ad.
+    final AnchoredAdaptiveBannerAdSize? size =
+        await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+            MediaQuery.of(context).size.width.truncate());
+
+    if (size == null) {
+      print('Unable to get height of anchored banner.');
+      return;
+    }
+
+    _anchoredAdaptiveAd = BannerAd(
+      // TODO: replace these test ad units with your own ad unit.
+      adUnitId:  'ca-app-pub-3940256099942544/6300978111',
+      size: size,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (Ad ad) {
+          print('$ad loaded: ${ad.responseInfo}');
+          setState(() {
+            // When the ad is loaded, get the ad size and use it to set
+            // the height of the ad container.
+            _anchoredAdaptiveAd = ad as BannerAd;
+            _isLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          print('Anchored adaptive banner failedToLoad: $error');
+          ad.dispose();
+        },
+      ),
+    );
+    return _anchoredAdaptiveAd!.load();
+  }
+
 
   final TextEditingController searchController = TextEditingController();
 
@@ -37,23 +78,6 @@ class _searchedCoursesState extends State<searchedCourses> {
       //nonPersonalizedAds: false
       );
 
-  void loadStaticBannerAd() {
-    staticAd = BannerAd(
-        adUnitId: //test: ca-app-pub-3940256099942544/6300978111 
-            'ca-app-pub-3940256099942544/6300978111',
-        size: AdSize.banner,
-        request: request,
-        listener: BannerAdListener(onAdLoaded: (ad) {
-          setState(() {
-            staticAdLoaded = true;
-          });
-        }, onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          print('ad failed to load ${error.message}');
-        }));
-
-    staticAd.load();
-  }
 
   bool? darkTheme1;
 
@@ -69,7 +93,7 @@ class _searchedCoursesState extends State<searchedCourses> {
     //es necesario inicializar el sharedpreferences tema, para que la variable book darkTheme esté inicializada como la recepcion del valor del sharedpreferences
     getSharedThemePrefs();
     //load ads
-    loadStaticBannerAd();
+    _loadAdaptativeAd();
   }
 
   Future<List<curso>> getListCoursesFound(query) async {
@@ -155,25 +179,20 @@ class _searchedCoursesState extends State<searchedCourses> {
                 ),
               ),
 
-        //ad banner bottom screen
-        bottomNavigationBar: Container(
-          height: 60,
-          child: Center(
-            child: Column(
-              children: [
-                Container(
-                  //load de ad and give size
-                  child: AdWidget(
-                    ad: staticAd,
-                  ),
-                  width: staticAd.size.width.toDouble(),
-                  height: staticAd.size.height.toDouble(),
-                  alignment: Alignment.bottomCenter,
-                )
-              ],
-            ),
-          ),
-        ),
+ bottomNavigationBar: _anchoredAdaptiveAd != null && _isLoaded
+    ? Container(
+        color: Colors.green,
+        width: _anchoredAdaptiveAd!.size.width.toDouble(),
+        height: _anchoredAdaptiveAd!.size.height.toDouble(),
+        child: AdWidget(ad: _anchoredAdaptiveAd!),
+      )
+    : Container(
+        color: Colors.green, // Aquí se establece el color del Container
+        width: _anchoredAdaptiveAd!.size.width.toDouble(),
+        height: _anchoredAdaptiveAd!.size.height.toDouble(),
+        child: AdWidget(ad: _anchoredAdaptiveAd!),
+      ),
+      
       ),
     );
   }

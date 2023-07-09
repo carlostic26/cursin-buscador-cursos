@@ -41,6 +41,7 @@ class _CountingAnimationState extends State<CountingAnimation>
         return Text(
           _animation.value.toInt().toString(),
           style: TextStyle(
+            fontWeight: FontWeight.bold,
             fontSize: 10,
             color: Colors.white,
           ),

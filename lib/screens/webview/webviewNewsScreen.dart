@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:cursin/methods/methods.dart';
+import 'package:cursin/helpers/methods/methods.dart';
 import 'package:cursin/screens/drawer/drawer_options/noticias_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';

@@ -108,8 +108,8 @@ class _drawerCursinState extends State<drawerCursin> {
                     padding: const EdgeInsets.fromLTRB(10, 1, 1, 1),
                     child: Text(
                         darkTheme1 == true
-                            ? 'Activar modo claro'
-                            : 'Activar modo oscuro',
+                            ? 'Activar tema claro'
+                            : 'Activar tema oscuro',
                         style: TextStyle(
                           color: darkTheme1 == true
                               ? Colors.white

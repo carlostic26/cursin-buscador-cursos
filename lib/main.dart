@@ -9,7 +9,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 AppOpenAd? openAd;
 bool isAdLoaded = false;
-bool shouldShowAd = false; // Variable adicional para controlar si se debe mostrar el anuncio
+
+// Variable adicional para controlar si se debe mostrar el anuncio
+bool shouldShowAd = false; 
 
 Future<void> loadAd() async {
   await AppOpenAd.load(
@@ -67,15 +69,11 @@ Future<void> main() async {
 
   runApp(ProviderScope(
     child: MaterialApp(
-
-
       // Configuración del tema
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           // Color de fondo del AppBar
-          color: Colors.green,
-          
-          
+          color: Colors.green,          
           // Iconos y elementos interactivos en el AppBar
           iconTheme: IconThemeData(
             color: Colors.white,

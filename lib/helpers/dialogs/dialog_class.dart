@@ -107,7 +107,7 @@ class DialogsCursin{
         });
   }
 
-   void showDialogToReportProblem(BuildContext context, title, entidad) {
+  void showDialogToReportProblem(BuildContext context, title, entidad) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -423,6 +423,5 @@ class DialogsCursin{
               ]);
         });
   }
-
 
 }

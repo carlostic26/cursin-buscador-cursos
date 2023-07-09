@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cursin/dialogs/dialog_class.dart';
-import 'package:cursin/methods/methods.dart';
+import 'package:cursin/helpers/dialogs/dialog_class.dart';
+import 'package:cursin/helpers/methods/methods.dart';
 import 'package:cursin/screens/webview/courses_webview.dart';
 import 'package:flutter_webview_pro/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';

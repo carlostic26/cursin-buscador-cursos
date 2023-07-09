@@ -1,5 +1,5 @@
 import 'package:cursin/screens/drawer/drawer.dart';
-import 'package:cursin/screens/drawer/drawer_options/carruselCertifiedWidget.dart';
+import 'package:cursin/screens/drawer/drawer_options/certifiedWidgetCarrusel.dart';
 import 'package:cursin/screens/drawer/drawer_options/search_courses.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';

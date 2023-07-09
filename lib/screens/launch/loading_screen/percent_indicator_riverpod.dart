@@ -1,14 +1,12 @@
 import 'package:cursin/screens/launch/loading_screen/counting_animator.dart';
 import 'package:cursin/services/localStorage/theme_preferences.dart';
-import 'package:cursin/provider/riverpod.dart';
+import 'package:cursin/helpers/provider/riverpod.dart';
 import 'package:cursin/screens/drawer/drawer_options/categorias_select.dart';
 import 'package:cursin/screens/launch/dialog_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class PercentIndicatorRiverpod extends ConsumerWidget {
   const PercentIndicatorRiverpod({super.key});
@@ -71,27 +69,47 @@ class PercentIndicatorRiverpod extends ConsumerWidget {
             ),
             SizedBox(
               height: 2,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Encontrando ",
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.white,
+            ),                              
+                
+            Padding(
+              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [                
+                  Text(
+                    "Encontrando ",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                CountingAnimation(endCount: maxCourses),
-                Text(
-                  " cursos gratuitos de 22 categorias...",
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.white,
+                  CountingAnimation(endCount: maxCourses),
+                  Text(
+                    " cursos gratuitos de 22 categorias...",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
+                      SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                    child: Text(
+                    
+                      "Buscamos y recopilamos los mejores cursos gratuitos de toda internet para ti.",
+                      style: TextStyle(
+                        fontSize:15,
+                        color: Colors.white,
+                      ),
+
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
             SizedBox(
               height: 30,
             ),

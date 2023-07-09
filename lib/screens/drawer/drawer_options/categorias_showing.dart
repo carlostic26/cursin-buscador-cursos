@@ -7,7 +7,6 @@ import 'package:cursin/screens/drawer/drawer_options/search_courses.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class categorias extends StatefulWidget {
   // se requiere recibir: 1. Nombre de categoria. 2. Pantalla de donde se proviene
@@ -23,7 +22,7 @@ class _categoriaState extends State<categorias> {
   late DatabaseHandler handler;
   Future<List<curso>>? _curso;
 
-  //ads variables
+  //adv variables
   late BannerAd staticAd;
   bool staticAdLoaded = false;
 
@@ -33,10 +32,10 @@ class _categoriaState extends State<categorias> {
     @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _loadAd();
+    _loadAdaptativeAd();
   }
 
-    Future<void> _loadAd() async {
+  Future<void> _loadAdaptativeAd() async {
     // Get an AnchoredAdaptiveBannerAdSize before loading the ad.
     final AnchoredAdaptiveBannerAdSize? size =
         await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
@@ -71,36 +70,11 @@ class _categoriaState extends State<categorias> {
     return _anchoredAdaptiveAd!.load();
   }
 
-
-
-
   static const AdRequest request = AdRequest(
       //keywords: ['',''],
       //contentUrl: '',
       //nonPersonalizedAds: false
       );
-
-  void loadStaticBannerAd() {
-    staticAd = BannerAd(
-        //test: ca-app-pub-3940256099942544/6300978111  ||  real: ca-app-pub-4336409771912215/1019860019
-        adUnitId: 'ca-app-pub-3940256099942544/6300978111',
-        size: AdSize.banner,
-        request: request,
-        listener: BannerAdListener(onAdLoaded: (ad) {
-          setState(() {
-            staticAdLoaded = true;
-          });
-        }, onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          print('ad failed to load ${error.message}');
-        }));
-
-    staticAd.load();
-  }
-
-  // get email to check login sesion
-  String email = "";
-  var children;
 
   late bool tapFav;
 
@@ -118,9 +92,14 @@ class _categoriaState extends State<categorias> {
     //es necesario inicializar el sharedpreferences tema, para que la variable book darkTheme esté inicializada como la recepcion del valor del sharedpreferences
     getSharedThemePrefs();
 
-    loadStaticBannerAd();
+    //loadStaticBannerAd();
     tapFav = false;
+    getCategoria();
+    
+    super.initState();
+  }
 
+  void getCategoria(){
     switch (widget.catProviene) {
       case "Transporte":
         {
@@ -364,12 +343,9 @@ class _categoriaState extends State<categorias> {
         }
         break;
     }
-
-    super.initState();
   }
 
   //Methods that receive the list select from dbhelper
-
   Future<List<curso>> getListTransporte() async {
     return await handler.categoriaTransporte();
   }
@@ -614,7 +590,6 @@ class _categoriaState extends State<categorias> {
       },
       child: Scaffold(
         backgroundColor: darkTheme1 == true ? Colors.grey[850] : Colors.white,
-        floatingActionButton: FloatingButtonCondition(context),
         appBar: AppBar(
           leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.white),
@@ -873,71 +848,4 @@ class _categoriaState extends State<categorias> {
     );
   }
 
-  void _showDialogDigitalizados(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-              title: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Sigue a Digitalizados",
-                      style: TextStyle(color: Colors.blue, fontSize: 20.0),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Aprende e infórmate de blockchain y cryptomonedas de una manera entretenida con Digitalizados',
-                      style: TextStyle(color: Colors.black, fontSize: 14.0),
-                    ),
-                  ]),
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.topCenter,
-                  padding: EdgeInsets.symmetric(horizontal: 5.0),
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(
-                              color: Colors.blueAccent,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        'Seguir',
-                        style: TextStyle(fontSize: 15, color: Colors.white),
-                      ),
-                      //when user press "ok" dismiss dialog
-                      onPressed: () {
-                        Navigator.pop(context);
-                        launch(
-                            'https://youtube.com/channel/UC6MAaY6M7EqWkMIp_uAlEJg');
-                      }),
-                )
-              ]);
-        });
-  }
-
-  // ignore: non_constant_identifier_names
-  FloatingButtonCondition(BuildContext context) {
-    if (widget.catProviene == "Crypto") {
-      return FloatingActionButton(
-          child: Icon(Icons.play_arrow),
-          onPressed: () => _showDialogDigitalizados(context));
-    } else {
-      return null;
-
-      /* FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () => _showDialogAddCourse(context)); */
-    }
-  }
 }
