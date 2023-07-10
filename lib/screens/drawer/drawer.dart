@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cursin/screens/drawer/drawer_options/categorias_select.dart';
 import 'package:cursin/screens/drawer/drawer_options/certificados.dart';
-import 'package:cursin/screens/drawer/drawer_options/courses_favs.dart';
+import 'package:cursin/screens/drawer/drawer_options/favs_courses.dart';
 import 'package:cursin/screens/drawer/drawer_options/delete_anun.dart';
 import 'package:cursin/screens/drawer/drawer_options/noticias_screen.dart';
 import 'package:cursin/screens/drawer/drawer_options/search_courses.dart';

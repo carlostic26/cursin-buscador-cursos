@@ -103,7 +103,7 @@ class PercentIndicatorRiverpod extends ConsumerWidget {
                     
                       "Buscamos y recopilamos los mejores cursos gratuitos de toda internet para ti.",
                       style: TextStyle(
-                        fontSize:15,
+                        fontSize:12,
                         color: Colors.white,
                       ),
 

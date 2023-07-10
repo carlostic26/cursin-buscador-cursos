@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:cursin/helpers/dialogs/dialog_class.dart';
 import 'package:cursin/screens/drawer/drawer_options/certificados.dart';
-import 'package:cursin/screens/drawer/drawer_options/courses_favs.dart';
+import 'package:cursin/screens/drawer/drawer_options/favs_courses.dart';
 import 'package:cursin/screens/drawer/drawer_options/delete_anun.dart';
 import 'package:giff_dialog/giff_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';

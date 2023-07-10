@@ -22,10 +22,6 @@ class _categoriaState extends State<categorias> {
   late DatabaseHandler handler;
   Future<List<curso>>? _curso;
 
-  //adv variables
-  late BannerAd staticAd;
-  bool staticAdLoaded = false;
-
   BannerAd? _anchoredAdaptiveAd;
   bool _isLoaded = false;
 
@@ -92,7 +88,7 @@ class _categoriaState extends State<categorias> {
     //es necesario inicializar el sharedpreferences tema, para que la variable book darkTheme esté inicializada como la recepcion del valor del sharedpreferences
     getSharedThemePrefs();
 
-    //loadStaticBannerAd();
+    _loadAdaptativeAd();
     tapFav = false;
     getCategoria();
     
