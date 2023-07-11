@@ -311,7 +311,7 @@ class DialogsCursin{
         entidad +
         ", disponible ahora en la App Cursin." +
         "\n\nDisfruta de este y otros cursos gratis más en la app Cursin. Pásalo a ese amigo que tanto lo necesita y aprovecha la App porque subimos cursos nuevos gratuitos todas las semanas! 🥳" +
-        "\n\nDescargar app: https://play.google.com/store/apps/details?id=com.appcursin.blogspot");
+        "\n\nDescargar app: https://play.google.com/store/apps/details?id=app.cursin.appcursin");
   }
 
   void showDialogVideoNoCarga(BuildContext context) {

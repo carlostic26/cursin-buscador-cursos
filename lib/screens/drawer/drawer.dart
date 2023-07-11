@@ -639,7 +639,7 @@ class _drawerCursinState extends State<drawerCursin> {
         "\n⚖️ Ciencias sociales y jurídicas" +
         "\n🎓 Ingenierías" +
         "\n🎉 Mucho más..." +
-        "\n\n\nBájala directamente desde la PlayStore: \nhttps://play.google.com/store/apps/details?id=com.appcursin.blogspot");
+        "\n\n\nBájala directamente desde la PlayStore: \nhttps://play.google.com/store/apps/details?id=app.cursin.appcursin");
   }
 
   updatingTheme() async {

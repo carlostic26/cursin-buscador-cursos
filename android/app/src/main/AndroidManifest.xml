@@ -1,13 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.appcursin.blogspot">
+    package="app.cursin.appcursin">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
    <application
         android:usesCleartextTraffic="true"
-        android:label="Cursin"
+        android:label="Cursin App"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/ic_launcher">
 
         <!-- change ID app  to test ID in the next line. actually is the real id: 433...-->
         <!-- Sample AdMob app ID, test: ca-app-pub-3940256099942544~3347511713 || new: ca-app-pub-4336409771912215~1614171285 || old: ca-app-pub-4336409771912215~5807859320--> 

@@ -493,7 +493,7 @@ class _infoAppState extends State<infoApp> {
                         ),
                         onPressed: () {
                           launch(
-                              'https://play.google.com/store/apps/details?id=com.appcursin.blogspot');
+                              'https://play.google.com/store/apps/details?id=app.cursin.appcursin');
                         },
                       ),
                     ),

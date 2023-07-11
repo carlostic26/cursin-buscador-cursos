@@ -322,7 +322,7 @@ class webviewState extends State<webview> {
         " GRATIS y CON CERTIFICADO incluido 🥳" +
         "\n\nDan acceso a este y otros cursos gratis en esta App llamada Cursin 👏🏻" +
         " Aprovechala que recién la acaban de sacar en la PlayStore 🥳👇🏼" +
-        "\n\nhttps://play.google.com/store/apps/details?id=com.appcursin.blogspot");
+        "\n\nhttps://play.google.com/store/apps/details?id=app.cursin.appcursin");
   }
 }
 
@@ -593,7 +593,7 @@ class webview extends StatelessWidget {
         " GRATIS y CON CERTIFICADO incluido 🥳" +
         "\n\nDan acceso a este y otros cursos gratis en esta App llamada Cursin 👏🏻" +
         " Aprovechala que recién la acaban de sacar en la PlayStore 🥳👇🏼" +
-        "\n\nhttps://play.google.com/store/apps/details?id=com.appcursin.blogspot");
+        "\n\nhttps://play.google.com/store/apps/details?id=app.cursin.appcursin");
   }
 }
 */
@@ -723,7 +723,7 @@ class webview extends StatelessWidget {
         " GRATIS y CON CERTIFICADO incluido 🥳" +
         "\n\nDan acceso a este y otros cursos gratis en esta App llamada Cursin 👏🏻" +
         " Aprovechala que recién la acaban de sacar en la PlayStore 🥳👇🏼" +
-        "\n\nhttps://play.google.com/store/apps/details?id=com.appcursin.blogspot");
+        "\n\nhttps://play.google.com/store/apps/details?id=app.cursin.appcursin");
   }
 }
 

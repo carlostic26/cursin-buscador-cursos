@@ -52,10 +52,22 @@ dependencies:
   flutter_downloader: ^1.10.2
   riverpod: ^2.3.6
   flutter_riverpod: ^2.3.6
+  flutter_app_name: ^0.1.1
+  flutter_launcher_icons: ^0.11.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons: 
+  android: true 
+  ios: true 
+  image_path: "assets/logo_icon.png" 
+  adaptative_icon_background: "#ffffff"
+  adaptative_icon_foreground: "assets/logo_icon.png"
+
+flutter_app_name:
+  name: "Cursin App"
 
 flutter_native_splash:
   color: "#000000"
