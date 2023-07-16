@@ -431,7 +431,7 @@ class _deleteAnunScreenState extends State<deleteAnunScreen> {
                                           child: Column(
                                             children: [
                                               Text(
-                                                  'Son necesarios para seguir manteniendo la app en el tiempo. Sirven para seguir indexando nuevos cursos cada semana, reparar bugs, mejorar las interfaces, y facilitar el proceso de búsqueda de cualquier curso gratis que necesites.'),
+                                                  'Son necesarios para seguir manteniendo la app en el tiempo. Sirven para seguir indexando nuevos cursos cada semana, reparar bugs, mejorar las interfaces, y facilitar el proceso de búsqueda de cualquier Curso deque necesites.'),
                                             ],
                                           ),
                                         )),

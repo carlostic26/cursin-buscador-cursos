@@ -12,6 +12,10 @@ keytool -genkey -v -keystore C:\\flutter_project\\cursin2\\cursin-main\\android\
 
 keytool -genkey -v -keystore C:/flutter_project/llaves/cursin/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias sd -storetype JKS
 
-
 C:\\Users\\USER_NAME\\Desktop\\ksk.jks
 keytool -importkeystore -srckeystore C:/flutter_project/cursin2/cursin-main/android/app/upload-keystore.jks -destkeystore C:/flutter_project/cursin2/cursin-main/android/app/upload-keystore.jks -deststoretype pkcs12
+
+
+//---------
+este es el definitivo, solo se debe cambiar la direccion de carpeta donde deseo que esté la llave C:\llaves\cursin2\
+keytool -genkey -v -keystore C:\llaves\cursin2\keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
