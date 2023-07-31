@@ -5,7 +5,7 @@ gradle-wrapper.jar
 /gradlew.bat
 /local.properties
 /key
-/ads.dart
+lib/ads.dart
 GeneratedPluginRegistrant.java
 
 # Remember to never publicly share your keystore.
