@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cursin/ad_ids.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,10 +25,11 @@ class _infoAppState extends State<infoApp> {
       //nonPersonalizedAds: false
       );
 
+        adCursin ads = adCursin();
+
   void loadStaticBannerAd() {
     staticAd = BannerAd(
-        adUnitId: //test: ca-app-pub-3940256099942544/6300978111  ||  real: ca-app-pub-4336409771912215/1019860019
-            'ca-app-pub-3940256099942544/6300978111',
+        adUnitId: ads.banner,
         size: AdSize.banner,
         request: request,
         listener: BannerAdListener(onAdLoaded: (ad) {

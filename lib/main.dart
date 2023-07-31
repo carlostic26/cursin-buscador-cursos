@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cursin/ad_ids.dart';
 import 'package:cursin/services/localStorage/theme_preferences.dart';
 import 'package:cursin/screens/launch/loading_screen/percent_indicator_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,14 +11,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 AppOpenAd? openAd;
 bool isAdLoaded = false;
 
-// Variable adicional para controlar si se debe mostrar el anuncio
-bool shouldShowAd = false; 
+bool shouldShowAd = false;
+adCursin ads = adCursin(); 
 
 Future<void> loadAd() async {
   await AppOpenAd.load(
-    adUnitId:
-        // test: // ca-app-pub-3940256099942544/3419835294
-        'ca-app-pub-3940256099942544/3419835294',
+    adUnitId:      
+        ads.openApp,
     request: const AdRequest(),
     adLoadCallback: AppOpenAdLoadCallback(
       onAdLoaded: (ad) {

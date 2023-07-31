@@ -1,3 +1,4 @@
+import 'package:cursin/ad_ids.dart';
 import 'package:cursin/screens/drawer/drawer.dart';
 import 'package:cursin/screens/drawer/drawer_options/certifiedWidgetCarrusel.dart';
 import 'package:cursin/screens/drawer/drawer_options/search_courses.dart';
@@ -15,9 +16,52 @@ class certificadosScreen extends StatefulWidget {
 //Clase que abre una pantalla entregando información relacionada a los certificados de estudio mas comunes que se puedan encontrar
 
 class _certificadosScreenState extends State<certificadosScreen> {
-  //ads
-  late BannerAd staticAd;
-  bool staticAdLoaded = false;
+  BannerAd? _anchoredAdaptiveAd;
+  bool _isLoaded = false;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _loadAdaptativeAd();
+  }
+
+  Future<void> _loadAdaptativeAd() async {
+    // Get an AnchoredAdaptiveBannerAdSize before loading the ad.
+    final AnchoredAdaptiveBannerAdSize? size =
+        await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+            MediaQuery.of(context).size.width.truncate());
+
+    if (size == null) {
+      print('Unable to get height of anchored banner.');
+      return;
+    }
+
+      adCursin ads = adCursin();
+
+    _anchoredAdaptiveAd = BannerAd(
+      // TODO: replace these test ad units with your own ad unit.
+      adUnitId:  ads.banner,
+      size: size,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (Ad ad) {
+          print('$ad loaded: ${ad.responseInfo}');
+          setState(() {
+            // When the ad is loaded, get the ad size and use it to set
+            // the height of the ad container.
+            _anchoredAdaptiveAd = ad as BannerAd;
+            _isLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          print('Anchored adaptive banner failedToLoad: $error');
+          ad.dispose();
+        },
+      ),
+    );
+    return _anchoredAdaptiveAd!.load();
+  }
+
 
   bool? darkTheme1, isNotifShowed;
 
@@ -34,28 +78,11 @@ class _certificadosScreenState extends State<certificadosScreen> {
       //nonPersonalizedAds: false
       );
 
-  void loadStaticBannerAd() {
-    staticAd = BannerAd(
-        adUnitId: 'ca-app-pub-4336409771912215/1019860019',
-        size: AdSize.banner,
-        request: request,
-        listener: BannerAdListener(onAdLoaded: (ad) {
-          setState(() {
-            staticAdLoaded = true;
-          });
-        }, onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          print('ad failed to load ${error.message}');
-        }));
-
-    staticAd.load();
-  }
-
   @override
   void initState() {
     super.initState();
 
-    loadStaticBannerAd();
+        _loadAdaptativeAd();
     //es necesario inicializar el sharedpreferences tema, para que la variable book darkTheme esté inicializada como la recepcion del valor del sharedpreferences
     getSharedThemePrefs();
   }
@@ -172,24 +199,18 @@ class _certificadosScreenState extends State<certificadosScreen> {
       ),
       drawer: drawerCursin(context: context),
       //ad banner bottom screen
-      bottomNavigationBar: Container(
-        height: 60,
-        width: staticAd.size.width.toDouble(),
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                //load de ad and give size
-                child: AdWidget(
-                  ad: staticAd,
-                ),
-                width: staticAd.size.width.toDouble(),
-                height: staticAd.size.height.toDouble(),
-                alignment: Alignment.bottomCenter,
-              )
-            ],
-          ),
-        ),
+      bottomNavigationBar: _anchoredAdaptiveAd != null && _isLoaded
+    ? Container(
+        color: Colors.green,
+        width: _anchoredAdaptiveAd!.size.width.toDouble(),
+        height: _anchoredAdaptiveAd!.size.height.toDouble(),
+        child: AdWidget(ad: _anchoredAdaptiveAd!),
+      )
+    : Container(
+        color: Colors.green, // Aquí se establece el color del Container
+        width: _anchoredAdaptiveAd!.size.width.toDouble(),
+        height: _anchoredAdaptiveAd!.size.height.toDouble(),
+        child: AdWidget(ad: _anchoredAdaptiveAd!),
       ),
     );
   }
