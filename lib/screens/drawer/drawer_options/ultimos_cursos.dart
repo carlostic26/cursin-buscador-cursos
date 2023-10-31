@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cursin/ad_ids.dart';
 import 'package:cursin/model/dbhelper.dart';
 import 'package:cursin/screens/drawer/drawer.dart';
 import 'package:cursin/screens/drawer/drawer_options/categorias_select.dart';
@@ -56,9 +57,11 @@ class _UltimosCursosListaState extends State<UltimosCursosLista> {
       return;
     }
 
+     adCursin ads = adCursin();
+
     _anchoredAdaptiveAd = BannerAd(
       // TODO: replace these test ad units with your own ad unit.
-      adUnitId:  'ca-app-pub-3940256099942544/6300978111',
+      adUnitId:  ads.banner,
       size: size,
       request: AdRequest(),
       listener: BannerAdListener(

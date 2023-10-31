@@ -498,7 +498,7 @@ class _drawerCursinState extends State<drawerCursin> {
               ),
               //at press, run the method
               onTap: () => launch(
-                  'https://www.ticnoticos.com/2022/09/politica-cursin.html'),
+                  'https://ticnoticos.blogspot.com/2023/07/privacy-policy-cursin-encuentra-cursos.html'),
             ),
           ],
         ),

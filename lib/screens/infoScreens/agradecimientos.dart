@@ -1,3 +1,4 @@
+import 'package:cursin/ad_ids.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,9 +37,11 @@ class _agradecimientosScreenState extends State<agradecimientosScreen> {
       return;
     }
 
+     adCursin ads = adCursin();
+
     _anchoredAdaptiveAd = BannerAd(
       // TODO: replace these test ad units with your own ad unit.
-      adUnitId:  'ca-app-pub-3940256099942544/6300978111',
+      adUnitId:   ads.banner,
       size: size,
       request: AdRequest(),
       listener: BannerAdListener(

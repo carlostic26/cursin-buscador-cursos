@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cursin/ad_ids.dart';
 import 'package:cursin/helpers/dialogs/dialog_class.dart';
 import 'package:cursin/screens/drawer/drawer_options/certificados.dart';
 import 'package:cursin/screens/drawer/drawer_options/favs_courses.dart';
@@ -55,10 +56,10 @@ class _CourseDetailState extends State<CourseDetail> {
       print('Unable to get height of anchored banner.');
       return;
     }
-
+ adCursin ads = adCursin();
     _anchoredAdaptiveAd = BannerAd(
       // TODO: replace these test ad units with your own ad unit.
-      adUnitId:  'ca-app-pub-3940256099942544/6300978111',
+      adUnitId:   ads.banner,
       size: size,
       request: AdRequest(),
       listener: BannerAdListener(
@@ -90,12 +91,11 @@ class _CourseDetailState extends State<CourseDetail> {
   InterstitialAd? interstitialAd;
   int interstitialAttempts = 0;
 
-   //Creating interstitial
-  //not used for the moment
+ adCursin ads = adCursin();
   void createInterstitialAd() {
     InterstitialAd.load(
         // ignore: deprecated_member_use
-        adUnitId: InterstitialAd.testAdUnitId,
+        adUnitId: ads.interstitial,
         request: request,
         adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
           interstitialAd = ad;
